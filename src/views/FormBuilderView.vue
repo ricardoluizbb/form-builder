@@ -22,35 +22,37 @@
 <script>
 import BuilderLeftColumn from '@/components/form-builder/BuilderLeftColumn.vue';
 import BuilderRightColumn from '@/components/form-builder/BuilderRightColumn.vue';
+import { useFormStore } from '@/stores/formStore';
 
 export default {
-  data() {
-    return {
-      forms: [
-        { id: 1, name: 'Formulário de Contato', description: 'Formulário para contato com cliente.' },
-        { id: 2, name: 'Formulário de Cadastro', description: 'Formulário para cadastro de usuários.' },
-        { id: 3, name: 'Formulário de Feedback', description: 'Formulário para coleta de feedback dos clientes.' },
-      ],
-      selectedForm: null,
-    };
-  },
+  name: 'FormBuilderView',
   components: {
     BuilderLeftColumn,
-    BuilderRightColumn
+    BuilderRightColumn,
+  },
+  data() {
+    return {
+      formStore: useFormStore(),
+    };
+  },
+  computed: {
+    forms() {
+      return this.formStore.forms;
+    },
+    selectedForm() {
+      return this.formStore.selectedForm;
+    },
   },
   methods: {
     selectForm(form) {
-      this.selectedForm = form;
+      this.formStore.selectForm(form);
     },
     createNewForm() {
-      const newForm = {
-        id: this.forms.length + 1,
-        name: 'Novo Formulário',
-        description: 'Descrição do novo formulário.',
-      };
-      this.forms.push(newForm);
-      this.selectedForm = newForm;
+      this.formStore.createNewForm();
     },
+  },
+  mounted() {
+    console.log(this.formStore);
   },
 };
 </script>
