@@ -1,0 +1,9 @@
+<template>
+    <v-text-field
+      outlined
+      dense
+      label="Valor"
+      value="0,00"
+      prefix="R$"
+    ></v-text-field>
+</template>
