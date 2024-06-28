@@ -14,11 +14,7 @@ export const useFormStore = defineStore({
       if (savedForms) {
         this.forms = JSON.parse(savedForms);
       } else {
-        this.forms = [
-          { id: 1, title: 'Formulário de Contato', fields: [{ label: 'Texto simples', type: 'text', value: '' }, { label: 'Anexo', type: 'file', value: '' }] },
-          { id: 2, title: 'Formulário de Cadastro', fields: [{ label: 'Parágrafo', type: 'text', value: '' }, { label: 'checkbox', type: 'checkbox', value: '' }] },
-          { id: 3, title: 'Formulário de Feedback', fields: [{ label: 'Comentário', type: 'textarea', value: '' }] },
-        ];
+        this.forms = [];
       }
     },
     saveForms() {
