@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row no-gutters>
-      <!-- Created form list -->
+      <!-- Lista de formulários criados -->
       <v-col cols="3">
         <BuilderLeftColumn
           :forms="forms"
@@ -11,7 +11,7 @@
         />
       </v-col>
       <v-divider vertical class="mr-4"></v-divider>
-      <!-- Selected form or new form render -->
+      <!-- Formulário selecionado renderizado -->
       <v-col cols="8">
         <template v-if="showNewFormComponent">
           <NewForm @form-saved="hideNewForm" />

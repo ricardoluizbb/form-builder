@@ -15,22 +15,28 @@
     <div v-else>
       <p>Selecione um formulário para visualizar aqui.</p>
     </div>
+
+    <NewFieldDialog ref="newFieldDialog" />
   </div>
 </template>
 
 <script>
-import { useFormStore } from '@/stores/formStore';
 import FieldsMenu from '@/components/form-builder/FieldsMenu.vue';
+import NewFieldDialog from '@/components/form-builder/NewFieldDialog.vue';
+import { useFormStore } from '@/stores/formStore';
 
 export default {
   name: 'BuilderRightColumn',
   components: {
     FieldsMenu,
+    NewFieldDialog,
+  },
+  data() {
+    return {
+      formStore: useFormStore(),
+    };
   },
   computed: {
-    formStore() {
-      return useFormStore();
-    },
     selectedForm() {
       return this.formStore.selectedForm;
     },
@@ -49,3 +55,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.active-form {
+  background-color: #f0f0f0;
+}
+</style>

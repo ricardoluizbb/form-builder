@@ -1,7 +1,9 @@
+<!-- FieldsMenu.vue -->
 <template>
-  <v-menu offset-y ref="menu">
+  <div>
+  <v-menu offset-y>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn color="primary" dark v-bind="attrs" v-on="on" @click="openMenu">
+      <v-btn color="primary" dark v-bind="attrs" v-on="on">
         Adicionar campo
       </v-btn>
     </template>
@@ -9,36 +11,41 @@
       <v-list-item
         v-for="(item, index) in items"
         :key="index"
-        @click="selectField(item)"
+        @click="openNewFieldDialog(item.type)"
       >
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-menu>
+  <NewFieldDialog ref="newFieldDialog" />
+  </div>
 </template>
 
 <script>
+import NewFieldDialog from './NewFieldDialog.vue';
+
 export default {
-  data: () => ({
-    items: [
-      { title: "Resposta curta", type: "text" }, // parágrafo ou resposta curta
-      { title: "Numérico", type: "text" },
-      { title: "Caixa de seleção", type: "text" }, // permitir multipla escolha ou não
-      { title: "Anexo", type: "text" },
-      { title: "Data/hora", type: "text" }, // somente data, somente hora ou data e hora
-      { title: "Cor", type: "text" },
-      { title: "Valor monetário", type: "text" },
-    ],
-  }),
-  methods: {
-    openMenu() {
-      this.$refs.menu.saveActivator();
-      this.$refs.menu.isActive = true;
-    },
-    selectField(field) {
-      this.$emit("field-selected", field);
-      this.$refs.menu.isActive = false;
-    },
+  name: 'FieldsMenu',
+  components: {
+    NewFieldDialog
   },
+  data() {
+    return {
+      items: [
+        { title: "Campo de texto", type: "text" }, // texto simples ou parágrafo
+        { title: "Numérico", type: "numeric" },
+        { title: "Caixa de seleção", type: "checkbox" }, // opção unica ou multipla escolha
+        { title: "Anexo", type: "attachment" },
+        { title: "Data/hora", type: "datetime" }, // data, hora ou data e hora
+        { title: "Cor", type: "color" },
+        { title: "Valor monetário", type: "currency" },
+      ],
+    };
+  },
+  methods: {
+    openNewFieldDialog(type) {
+      this.$refs.newFieldDialog.open(type);
+    }
+  }
 };
 </script>
