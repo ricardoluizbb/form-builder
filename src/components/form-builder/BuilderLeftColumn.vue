@@ -15,17 +15,26 @@
 </template>
 
 <script>
+import { useFormStore } from '@/stores/formStore';
+
 export default {
+  name: 'BuilderLeftColumn',
   props: {
     forms: Array,
     selectedForm: Object,
   },
+  computed: {
+    formStore() {
+      return useFormStore();
+    },
+  },
   methods: {
     selectForm(form) {
+      this.formStore.selectForm(form);
       this.$emit("form-selected", form);
     },
     createNewForm() {
-      this.$emit("new-form");
+      this.formStore.createNewForm();
     },
   },
 };

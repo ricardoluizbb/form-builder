@@ -11,9 +11,17 @@
 </template>
 
 <script>
+import { useFormStore } from '@/stores/formStore';
+
 export default {
-  props: {
-    selectedForm: Object, 
+  name: 'BuilderRightColumn',
+  computed: {
+    formStore() {
+      return useFormStore();
+    },
+    selectedForm() {
+      return this.formStore.selectedForm;
+    },
   },
 };
 </script>
