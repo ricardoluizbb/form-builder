@@ -1,4 +1,3 @@
-// stores/formStore.js
 import { defineStore } from 'pinia';
 
 const LOCAL_STORAGE_KEY = 'formsData';
@@ -16,9 +15,9 @@ export const useFormStore = defineStore({
         this.forms = JSON.parse(savedForms);
       } else {
         this.forms = [
-          { id: 1, name: 'Formulário de Contato', description: 'Formulário para contato com cliente.' },
-          { id: 2, name: 'Formulário de Cadastro', description: 'Formulário para cadastro de usuários.' },
-          { id: 3, name: 'Formulário de Feedback', description: 'Formulário para coleta de feedback dos clientes.' },
+          { id: 1, title: 'Formulário de Contato', fields: [{ label: 'Texto simples', type: 'text', value: '' }, { label: 'Anexo', type: 'file', value: '' }] },
+          { id: 2, title: 'Formulário de Cadastro', fields: [{ label: 'Parágrafo', type: 'text', value: '' }, { label: 'checkbox', type: 'checkbox', value: '' }] },
+          { id: 3, title: 'Formulário de Feedback', fields: [{ label: 'Comentário', type: 'textarea', value: '' }] },
         ];
       }
     },
@@ -28,11 +27,11 @@ export const useFormStore = defineStore({
     selectForm(form) {
       this.selectedForm = form;
     },
-    createNewForm() {
+    createNewForm(title) {
       const newForm = {
         id: this.forms.length + 1,
-        name: 'Novo Formulário',
-        description: 'Descrição do novo formulário.',
+        title: title,
+        fields: [],
       };
       this.forms.push(newForm);
       this.selectedForm = newForm;
