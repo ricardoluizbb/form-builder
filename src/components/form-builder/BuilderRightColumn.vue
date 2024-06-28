@@ -15,21 +15,17 @@
     <div v-else>
       <p>Selecione um formulário para visualizar aqui.</p>
     </div>
-
-    <NewFieldDialog ref="newFieldDialog" />
   </div>
 </template>
 
 <script>
 import FieldsMenu from '@/components/form-builder/FieldsMenu.vue';
-import NewFieldDialog from '@/components/form-builder/NewFieldDialog.vue';
 import { useFormStore } from '@/stores/formStore';
 
 export default {
   name: 'BuilderRightColumn',
   components: {
     FieldsMenu,
-    NewFieldDialog,
   },
   data() {
     return {
