@@ -52,7 +52,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.formStore);
+    this.formStore.loadForms();
   },
 };
 </script>
