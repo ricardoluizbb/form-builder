@@ -20,17 +20,17 @@
 <script>
 import FieldsMenu from "@/components/form-builder/FieldsMenu.vue";
 import { useFormStore } from "@/stores/formStore";
-import NumberField from "@/components/fields/NumberField.vue";
-import TextField from "@/components/fields/TextField.vue";
-import TextareaField from "@/components/fields/TextareaField.vue";
-import DateField from "../fields/DateField.vue";
-import DateTimeField from "../fields/DateTimeField.vue";
-import TimeField from "../fields/TimeField.vue";
-import FileField from "../fields/FileField.vue";
-import MonetaryField from "../fields/MonetaryField.vue";
-import SelectionField from "../fields/SelectionField.vue";
-import MultiSelectionField from "@/components/fields/MultiSelectionField.vue";
-import ColorField from "../fields/ColorField.vue";
+import NumberField from "./fields/NumberField.vue";
+import TextField from "./fields/TextField.vue";
+import TextareaField from "./fields/TextareaField.vue";
+import DateField from "./fields/DateField.vue";
+import DateTimeField from "./fields/DateTimeField.vue";
+import TimeField from "./fields/TimeField.vue";
+import FileField from "./fields/FileField.vue";
+import MonetaryField from "./fields/MonetaryField.vue";
+import SelectionField from "./fields/SelectionField.vue";
+import MultiSelectionField from "./fields/MultiSelectionField.vue";
+import ColorField from "./fields/ColorField.vue";
 
 export default {
   name: "BuilderRightColumn",
