@@ -113,7 +113,6 @@ export default {
       this.selectedFieldType = null;
     },
     saveField() {
-      console.log(`Saved field: ${this.dialogTitle} with option: ${this.selectedOption}`);
       this.closeDialog();
     },
   },
