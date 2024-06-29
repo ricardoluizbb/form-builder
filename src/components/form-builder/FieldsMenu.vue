@@ -34,7 +34,7 @@ export default {
         { title: "Campo de texto", type: "text" }, // texto simples ou parágrafo
         { title: "Numérico", type: "numeric" },
         { title: "Caixa de seleção", type: "selection" }, // opção unica ou multipla escolha
-        { title: "Anexo", type: "file" },
+        { title: "Anexo", type: "attachment" },
         { title: "Data/hora", type: "datetime" }, // data, hora ou data e hora
         { title: "Cor", type: "color" },
         { title: "Valor monetário", type: "currency" },

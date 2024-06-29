@@ -69,7 +69,7 @@ export default {
       if (this.selectedForm) {
         const value = this.getInitialValue(field);
         this.selectedForm.fields.push({
-          label: this.getFieldLabel(field),
+          label: field.label,
           component: this.getFieldComponent(field),
           value,
         });
@@ -83,26 +83,6 @@ export default {
           return 0;
         default:
           return "";
-      }
-    },
-    getFieldLabel(field) {
-      switch (field.type) {
-        case "text":
-          return "Campo de texto";
-        case "selection":
-          return "Campo de seleção";
-        case "datetime":
-          return "Data/Hora";
-        case "numeric":
-          return "Numérico";
-        case "color":
-          return "Cor";
-        case "currency":
-          return "Valor monetário";
-        case "file":
-          return "Anexo";
-        default:
-          break;
       }
     },
     getFieldComponent(field) {

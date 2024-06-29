@@ -1,126 +1,94 @@
 <template>
   <v-dialog persistent dense v-model="dialog" height="300px" width="400px">
     <v-card>
-      <v-card-title>
+      <v-card-title class="mb-4">
         <span class="headline">{{ dialogTitle }}</span>
       </v-card-title>
-      <v-card-text>
+      <v-card-subtitle>
         <span class="text-subtitle-1 text-justify">{{ dialogDescription }}</span>
+      </v-card-subtitle>
+      <v-card-text class="pb-0">
+        <v-text-field
+          autofocus
+          dense
+          outlined
+          label="Defina o nome deste campo"
+          v-model="fieldLabel"
+        ></v-text-field>
       </v-card-text>
-      <v-card-text>
-        <v-text-field dense outlined label="label"></v-text-field>
-      </v-card-text>
-      <v-card-text>
-        <template v-if="selectedFieldType">
-          <div v-if="selectedFieldType === 'text'">
-            <v-radio-group v-model="selectedOption">
-              <v-radio
-                v-for="option in textFieldOptions"
-                :key="option"
-                :label="option"
-                :value="option"
-              ></v-radio>
-            </v-radio-group>
-          </div>
-          <div v-if="selectedFieldType === 'selection'">
-            <v-radio-group v-model="selectedOption">
-              <v-radio
-                v-for="option in selectionFieldOptions"
-                :key="option"
-                :label="option"
-                :value="option"
-              ></v-radio>
-            </v-radio-group>
-          </div>
-          <div v-if="selectedFieldType === 'datetime'">
-            <v-radio-group v-model="selectedOption">
-              <v-radio
-                v-for="option in datetimeFieldOptions"
-                :key="option"
-                :label="option"
-                :value="option"
-              ></v-radio>
-            </v-radio-group>
-          </div>
+      <v-card-text class="pt-0 pb-0">
+        <template v-if="fieldOptions.length">
+          <v-radio-group v-model="selectedOption">
+            <v-radio
+              v-for="option in fieldOptions"
+              :key="option"
+              :label="option"
+              :value="option"
+            ></v-radio>
+          </v-radio-group>
         </template>
       </v-card-text>
       <v-card-actions>
         <v-btn text color="primary" @click="saveField">Salvar</v-btn>
-        <v-btn text color="negative" @click="closeDialog">Cancelar</v-btn>
+        <v-btn text color="red darken-1" @click="closeDialog">Cancelar</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import { useFormStore } from "@/stores/formStore";
+import { mapState } from "pinia";
+
 export default {
   name: "NewFieldDialog",
   data() {
     return {
       dialog: false,
-      dialogTitle: "",
-      dialogDescription: "",
-      selectedFieldType: "",
+      fieldLabel: "",
       selectedOption: "",
-      textFieldOptions: ["Texto curto", "Parágrafo"],
-      selectionFieldOptions: ["Escolha única", "Múltipla escolha"],
-      datetimeFieldOptions: ["Apenas data", "Apenas hora", "Data e hora"],
+      selectedFieldType: null,
     };
+  },
+  computed: {
+    ...mapState(useFormStore, ["fieldTypes"]),
+    dialogTitle() {
+      return this.selectedFieldType
+        ? this.fieldTypes[this.selectedFieldType].title
+        : "";
+    },
+    dialogDescription() {
+      return this.selectedFieldType
+        ? this.fieldTypes[this.selectedFieldType].description
+        : "";
+    },
+    fieldOptions() {
+      return this.selectedFieldType
+        ? this.fieldTypes[this.selectedFieldType].options
+        : [];
+    },
   },
   methods: {
     open(type) {
       this.dialog = true;
+      this.selectedFieldType = type;
       this.selectedOption = "";
-      switch (type) {
-        case "text":
-          this.dialogTitle = "Campo de Texto";
-          this.dialogDescription = "Um campo que o usuário pode digitar qualquer mensagem que desejar. Especifique o tipo do campo que deseja incluir:"
-          this.selectedFieldType = "text";
-          break;
-        case "numeric":
-          this.dialogTitle = "Campo Numérico";
-          this.dialogDescription = "Um campo que o usuário pode digitar apenas números."
-          this.selectedFieldType = "numeric";
-          break;
-        case "selection":
-          this.dialogTitle = "Campo Caixa de Seleção";
-          this.dialogDescription = "Um campo que o usuário pode selecionar uma ou mais respostas. Escolha qual tipo de campo deseja incluir:"
-          this.selectedFieldType = "selection";
-          break;
-        case "datetime":
-          this.dialogTitle = "Campo Data/Hora";
-          this.dialogDescription = "Um campo que o usuário pode selecionar data, hora ou data e hora. Escolha qual tipo de campo deseja incluir:"
-          this.selectedFieldType = "datetime";
-          break;
-        case "color":
-          this.dialogTitle = "Campo Escolher Cor";
-          this.dialogDescription = "Um campo que o usuário pode selecionar uma cor."
-          this.selectedFieldType = "color";
-          break;
-        case "currency":
-          this.dialogTitle = "Campo Valor Monetário";
-          this.dialogDescription = "Um campo que o usuário pode digitar um valor monetário"
-          this.selectedFieldType = "currency";
-          break;
-        case "file":
-          this.dialogTitle = "Campo de Arquivo";
-          this.dialogDescription = "Um campo que o usuário pode adicionar um arquivo."
-          this.selectedFieldType = "file";
-          break;
-        default:
-          this.selectedFieldType = null;
-      }
     },
     closeDialog() {
       this.dialog = false;
+      this.fieldLabel = "";
       this.selectedFieldType = null;
     },
     saveField() {
-      this.$emit('field-saved', {
-        type: this.selectedFieldType,
-        option: this.selectedOption
-      });
-      this.closeDialog();
+      if (this.fieldLabel && this.selectedFieldType) {
+        const field = {
+          type: this.selectedFieldType,
+          label: this.fieldLabel,
+          option: this.selectedOption,
+        };
+        this.$emit("field-saved", field);
+        this.closeDialog();
+      }
     },
   },
 };

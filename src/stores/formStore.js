@@ -7,6 +7,43 @@ export const useFormStore = defineStore({
   state: () => ({
     forms: [],
     selectedForm: null,
+    fieldTypes: {
+      text: {
+        title: "Campo de Texto",
+        description: "Um campo que o usuário pode digitar qualquer mensagem que desejar. Especifique o tipo do campo que deseja incluir:",
+        options: ["Texto curto", "Parágrafo"],
+      },
+      numeric: {
+        title: "Campo Numérico",
+        description: "Um campo que o usuário pode digitar apenas números.",
+        options: [],
+      },
+      selection: {
+        title: "Campo Caixa de Seleção",
+        description: "Um campo que o usuário pode selecionar uma ou mais respostas. Escolha qual tipo de campo deseja incluir:",
+        options: ["Escolha única", "Múltipla escolha"],
+      },
+      datetime: {
+        title: "Campo Data/Hora",
+        description: "Um campo que o usuário pode selecionar data, hora ou data e hora. Escolha qual tipo de campo deseja incluir:",
+        options: ["Apenas data", "Apenas hora", "Data e hora"],
+      },
+      color: {
+        title: "Campo Escolher Cor",
+        description: "Um campo que o usuário pode selecionar uma cor.",
+        options: [],
+      },
+      currency: {
+        title: "Campo Valor Monetário",
+        description: "Um campo que o usuário pode digitar um valor monetário",
+        options: [],
+      },
+      file: {
+        title: "Campo de Arquivo",
+        description: "Um campo que o usuário pode adicionar um arquivo.",
+        options: [],
+      },
+    },
   }),
   actions: {
     loadForms() {
@@ -16,6 +53,7 @@ export const useFormStore = defineStore({
       } else {
         this.forms = [];
       }
+      console.log(savedForms)
     },
     saveForms() {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.forms));
@@ -39,6 +77,12 @@ export const useFormStore = defineStore({
     },
     clearSelectedForm() {
       this.selectedForm = null;
+    },
+    addFieldToSelectedForm(field) {
+      if (this.selectedForm) {
+        this.selectedForm.fields.push(field);
+        this.saveForms();
+      }
     },
   },
 });
