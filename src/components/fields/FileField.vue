@@ -1,8 +1,14 @@
 <template>
     <v-file-input
-        chips
-        truncate-length="15"
-        dense
-        outlined
+      outlined
+      dense
+      chips
+      multiple
+      label="Campo de anexo"
     ></v-file-input>
 </template>
+<script>
+export default {
+    name: 'FileField'
+}
+</script>

@@ -1,5 +1,5 @@
 <template>
-  <v-select :items="items" label="Outlined style" outlined></v-select>
+  <v-select dense :items="items" label="Outlined style" outlined></v-select>
 </template>
 
 <script>

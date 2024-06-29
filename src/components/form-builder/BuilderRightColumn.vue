@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <div v-if="selectedForm">
+  <div v-if="selectedForm">
+    <div class="mb-4">
       <h3>{{ selectedForm.title }}</h3>
-      <div v-for="(field, index) in selectedForm.fields" :key="index">
-        <component
-          :is="field.component"
-          :label="field.label"
-          v-model="field.value"
-        />
-      </div>
       <FieldsMenu @field-selected="addField" />
     </div>
-    <div v-else>
-      <p>Selecione um formulário para visualizar aqui.</p>
+    <div v-for="(field, index) in selectedForm.fields" :key="index">
+      <component
+        :is="field.component"
+        :label="field.label"
+        v-model="field.value"
+      />
     </div>
+  </div>
+  <div v-else>
+    <p>Selecione um formulário para visualizar aqui.</p>
   </div>
 </template>
 
@@ -29,8 +29,8 @@ import TimeField from "../fields/TimeField.vue";
 import FileField from "../fields/FileField.vue";
 import MonetaryField from "../fields/MonetaryField.vue";
 import SelectionField from "../fields/SelectionField.vue";
-import MultiSelectionField from "@/components/fields/MultiSelectionField.vue"
-
+import MultiSelectionField from "@/components/fields/MultiSelectionField.vue";
+import ColorField from "../fields/ColorField.vue";
 
 export default {
   name: "BuilderRightColumn",
@@ -45,7 +45,8 @@ export default {
     FileField,
     MonetaryField,
     SelectionField,
-    MultiSelectionField
+    MultiSelectionField,
+    ColorField,
   },
   data() {
     return {
@@ -103,10 +104,12 @@ export default {
         case "text":
           return field.option === "Texto curto" ? "TextField" : "TextareaField";
         case "selection":
-          return field.option === "Escolha única" ? "SelectionField" : "MultiSelectionField";
+          return field.option === "Escolha única"
+            ? "SelectionField"
+            : "MultiSelectionField";
         case "datetime":
-          if (field.option === "Apenas data") return "TextField";
-          if (field.option === "Apenas Hora") return "TimeField";
+          if (field.option === "Apenas data") return "DateField";
+          if (field.option === "Apenas hora") return "TimeField";
           if (field.option === "Data e hora") return "DateTimeField";
           break;
         case "numeric":

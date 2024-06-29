@@ -1,5 +1,7 @@
 <template>
   <v-select
+    outlined
+    dense
     v-model="value"
     :items="items"
     attach
