@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row no-gutters>
       <!-- Lista de formulários criados -->
-      <v-col cols="3">
+      <v-col cols="2">
         <BuilderLeftColumn
           :forms="forms"
           :selectedForm="selectedForm"
@@ -10,9 +10,11 @@
           @new-form="showNewForm"
         />
       </v-col>
-      <v-divider vertical class="mr-4"></v-divider>
+      <v-col cols="2">
+        <v-divider vertical></v-divider>
+      </v-col>
       <!-- Formulário selecionado renderizado -->
-      <v-col cols="8">
+      <v-col cols="6">
         <template v-if="showNewFormComponent">
           <NewForm @form-saved="hideNewForm" />
         </template>

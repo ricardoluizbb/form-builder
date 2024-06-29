@@ -8,6 +8,9 @@
         <span class="text-subtitle-1 text-justify">{{ dialogDescription }}</span>
       </v-card-text>
       <v-card-text>
+        <v-text-field dense outlined label="label"></v-text-field>
+      </v-card-text>
+      <v-card-text>
         <template v-if="selectedFieldType">
           <div v-if="selectedFieldType === 'text'">
             <v-radio-group v-model="selectedOption">
