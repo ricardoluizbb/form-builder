@@ -33,5 +33,12 @@ export const useFormStore = defineStore({
       this.selectedForm = newForm;
       this.saveForms();
     },
+    deleteForm(formId) {
+      this.forms = this.forms.filter(form => form.id !== formId);
+      this.saveForms();
+    },
+    clearSelectedForm() {
+      this.selectedForm = null;
+    },
   },
 });

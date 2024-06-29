@@ -1,19 +1,23 @@
 <template>
-  <div v-if="selectedForm">
-    <div class="mb-4">
-      <h3>{{ selectedForm.title }}</h3>
-      <FieldsMenu @field-selected="addField" />
+  <div>
+    <div v-if="selectedForm">
+      <h2 class="mb-8">{{ selectedForm.title }}</h2>
+      <v-row class="mb-4 justify-space-between">
+        <FieldsMenu @field-selected="addField" />
+        <v-btn color="red darken-1" outlined @click="openDeleteDialog">Excluir formulário</v-btn>
+      </v-row>
+      <div v-for="(field, index) in selectedForm.fields" :key="index">
+        <component
+          :is="field.component"
+          :label="field.label"
+          v-model="field.value"
+        />
+      </div>
     </div>
-    <div v-for="(field, index) in selectedForm.fields" :key="index">
-      <component
-        :is="field.component"
-        :label="field.label"
-        v-model="field.value"
-      />
+    <div v-else>
+      <p>Selecione um formulário para visualizar aqui.</p>
     </div>
-  </div>
-  <div v-else>
-    <p>Selecione um formulário para visualizar aqui.</p>
+    <DeleteFormDialog ref="deleteDialog" @confirm-delete="deleteForm" />
   </div>
 </template>
 
@@ -31,6 +35,7 @@ import MonetaryField from "./fields/MonetaryField.vue";
 import SelectionField from "./fields/SelectionField.vue";
 import MultiSelectionField from "./fields/MultiSelectionField.vue";
 import ColorField from "./fields/ColorField.vue";
+import DeleteFormDialog from "./DeleteFormDialog.vue";
 
 export default {
   name: "BuilderRightColumn",
@@ -47,6 +52,7 @@ export default {
     SelectionField,
     MultiSelectionField,
     ColorField,
+    DeleteFormDialog,
   },
   data() {
     return {
@@ -122,6 +128,15 @@ export default {
           return "FileField";
         default:
           break;
+      }
+    },
+    openDeleteDialog() {
+      this.$refs.deleteDialog.openDialog();
+    },
+    deleteForm() {
+      if (this.selectedForm) {
+        this.formStore.deleteForm(this.selectedForm.id);
+        this.formStore.clearSelectedForm();
       }
     },
   },
