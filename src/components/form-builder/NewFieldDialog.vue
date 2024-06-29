@@ -113,6 +113,10 @@ export default {
       this.selectedFieldType = null;
     },
     saveField() {
+      this.$emit('field-saved', {
+        type: this.selectedFieldType,
+        option: this.selectedOption
+      });
       this.closeDialog();
     },
   },

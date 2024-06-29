@@ -2,6 +2,7 @@
   <div>
     <v-text-field
       dense
+      autofocus
       v-model="newFormTitle"
       label="Título do formulário"
       outlined

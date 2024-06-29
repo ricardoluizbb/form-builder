@@ -1,23 +1,22 @@
-<!-- FieldsMenu.vue -->
 <template>
   <div>
-  <v-menu offset-y>
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn color="primary" dark v-bind="attrs" v-on="on">
-        Adicionar campo
-      </v-btn>
-    </template>
-    <v-list>
-      <v-list-item
-        v-for="(item, index) in items"
-        :key="index"
-        @click="openNewFieldDialog(item.type)"
-      >
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
-      </v-list-item>
-    </v-list>
-  </v-menu>
-  <NewFieldDialog ref="newFieldDialog" />
+    <v-menu offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="primary" dark v-bind="attrs" v-on="on">
+          Adicionar campo
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          @click="openNewFieldDialog(item.type)"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+    <NewFieldDialog ref="newFieldDialog" @field-saved="onFieldSaved" />
   </div>
 </template>
 
@@ -45,6 +44,9 @@ export default {
   methods: {
     openNewFieldDialog(type) {
       this.$refs.newFieldDialog.open(type);
+    },
+    onFieldSaved(field) {
+      this.$emit('field-selected', field);
     }
   }
 };

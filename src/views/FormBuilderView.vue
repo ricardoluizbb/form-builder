@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     selectForm(form) {
+      console.log("chamei")
       this.formStore.selectForm(form);
       this.showNewFormComponent = false;
     },
@@ -65,7 +66,6 @@ export default {
   },
   mounted() {
     this.formStore.loadForms();
-    console.log(this.formStore.forms)
   },
 };
 </script>

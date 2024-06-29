@@ -31,7 +31,7 @@ export default {
   methods: {
     selectForm(form) {
       this.formStore.selectForm(form);
-      this.$emit("form-selected", form);
+      this.$emit('form-selected', form);
     },
   },
 };

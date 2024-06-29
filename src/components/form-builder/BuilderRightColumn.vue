@@ -3,10 +3,9 @@
     <div v-if="selectedForm">
       <h3>{{ selectedForm.title }}</h3>
       <div v-for="(field, index) in selectedForm.fields" :key="index">
-        <label :for="'field-' + index">{{ field.label }}</label>
-        <input
-          :type="field.type"
-          :id="'field-' + index"
+        <component
+          :is="field.component"
+          :label="field.label"
           v-model="field.value"
         />
       </div>
@@ -19,13 +18,34 @@
 </template>
 
 <script>
-import FieldsMenu from '@/components/form-builder/FieldsMenu.vue';
-import { useFormStore } from '@/stores/formStore';
+import FieldsMenu from "@/components/form-builder/FieldsMenu.vue";
+import { useFormStore } from "@/stores/formStore";
+import NumberField from "@/components/fields/NumberField.vue";
+import TextField from "@/components/fields/TextField.vue";
+import TextareaField from "@/components/fields/TextareaField.vue";
+import DateField from "../fields/DateField.vue";
+import DateTimeField from "../fields/DateTimeField.vue";
+import TimeField from "../fields/TimeField.vue";
+import FileField from "../fields/FileField.vue";
+import MonetaryField from "../fields/MonetaryField.vue";
+import SelectionField from "../fields/SelectionField.vue";
+import MultiSelectionField from "@/components/fields/MultiSelectionField.vue"
+
 
 export default {
-  name: 'BuilderRightColumn',
+  name: "BuilderRightColumn",
   components: {
     FieldsMenu,
+    NumberField,
+    TextField,
+    TextareaField,
+    DateField,
+    DateTimeField,
+    TimeField,
+    FileField,
+    MonetaryField,
+    SelectionField,
+    MultiSelectionField
   },
   data() {
     return {
@@ -40,20 +60,67 @@ export default {
   methods: {
     addField(field) {
       if (this.selectedForm) {
+        const value = this.getInitialValue(field);
         this.selectedForm.fields.push({
-          label: field.title,
-          type: field.type,
-          value: '',
+          label: this.getFieldLabel(field),
+          component: this.getFieldComponent(field),
+          value,
         });
         this.formStore.saveForms();
+      }
+    },
+    getInitialValue(field) {
+      switch (field.type) {
+        case "numeric":
+        case "currency":
+          return 0;
+        default:
+          return "";
+      }
+    },
+    getFieldLabel(field) {
+      switch (field.type) {
+        case "text":
+          return "Campo de texto";
+        case "selection":
+          return "Campo de seleção";
+        case "datetime":
+          return "Data/Hora";
+        case "numeric":
+          return "Numérico";
+        case "color":
+          return "Cor";
+        case "currency":
+          return "Valor monetário";
+        case "file":
+          return "Anexo";
+        default:
+          break;
+      }
+    },
+    getFieldComponent(field) {
+      switch (field.type) {
+        case "text":
+          return field.option === "Texto curto" ? "TextField" : "TextareaField";
+        case "selection":
+          return field.option === "Escolha única" ? "SelectionField" : "MultiSelectionField";
+        case "datetime":
+          if (field.option === "Apenas data") return "TextField";
+          if (field.option === "Apenas Hora") return "TimeField";
+          if (field.option === "Data e hora") return "DateTimeField";
+          break;
+        case "numeric":
+          return "NumberField";
+        case "color":
+          return "ColorField";
+        case "currency":
+          return "MonetaryField";
+        case "file":
+          return "FileField";
+        default:
+          break;
       }
     },
   },
 };
 </script>
-
-<style scoped>
-.active-form {
-  background-color: #f0f0f0;
-}
-</style>
