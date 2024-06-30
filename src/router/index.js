@@ -1,19 +1,19 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import FormBuilderView from '@/views/FormBuilderView.vue'
-import FormListView from '@/views/FormListView.vue'
+import FillFormView from '@/views/FillFormView.vue';
 
 Vue.use(Router);
 
 const routes = [
   {
-    path: '/form-list',
-    name: 'FormList',
-    component: FormListView,
+    path: '/fill-form',
+    name: 'FillFormView',
+    component: FillFormView,
   },
   {
     path: '/',
-    name: 'FormBuilder',
+    name: 'FormBuilderView',
     component: FormBuilderView,
   },
 ];
