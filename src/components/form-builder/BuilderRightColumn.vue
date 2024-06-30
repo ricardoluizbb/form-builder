@@ -11,6 +11,7 @@
           :is="field.component"
           :label="field.label"
           v-model="field.value"
+          :options="field.options"
         />
         <v-menu
           offset-y
@@ -99,6 +100,7 @@ export default {
           label: field.label,
           component: this.getFieldComponent(field),
           value,
+          options: field.customOptions
         });
         this.formStore.saveForms();
       }
@@ -108,6 +110,8 @@ export default {
         case "numeric":
         case "currency":
           return 0;
+        case "selection":
+          return field.option == "Múltipla escolha" ? [] : ""
         default:
           return "";
       }
@@ -117,9 +121,7 @@ export default {
         case "text":
           return field.option === "Texto curto" ? "TextField" : "TextareaField";
         case "selection":
-          return field.option === "Escolha única"
-            ? "SelectionField"
-            : "MultiSelectionField";
+          return field.option == "Seleção única" ? "SelectionField" : "MultiSelectionField"
         case "datetime":
           if (field.option === "Apenas data") return "DateField";
           if (field.option === "Apenas hora") return "TimeField";

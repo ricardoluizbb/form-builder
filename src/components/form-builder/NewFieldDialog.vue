@@ -1,5 +1,5 @@
 <template>
-  <v-dialog persistent dense v-model="dialog" height="300px" width="400px">
+  <v-dialog persistent dense v-model="dialog" height="400px" width="400px">
     <v-card>
       <v-card-title class="mb-4">
         <span class="headline">{{ dialogTitle }}</span>
@@ -27,6 +27,29 @@
             ></v-radio>
           </v-radio-group>
         </template>
+        <template v-if="selectedFieldType === 'selection'">
+          <div>
+            <v-text-field
+              v-for="(option, index) in customOptions"
+              :key="index"
+              :label="'Opção ' + (index + 1)"
+              v-model="customOptions[index]"
+              dense
+              outlined
+            ></v-text-field>
+            <v-btn
+              text
+              color="primary"
+              @click="addOption"
+              :disabled="customOptions.length >= 4"
+            >
+              Adicionar opção
+            </v-btn>
+            <v-alert v-if="customOptions.length >= 4" type="error" dense>
+              Você só pode adicionar até 4 opções.
+            </v-alert>
+          </div>
+        </template>
       </v-card-text>
       <v-card-actions>
         <v-btn text color="primary" @click="saveField">Salvar</v-btn>
@@ -48,6 +71,7 @@ export default {
       fieldLabel: "",
       selectedOption: "",
       selectedFieldType: null,
+      customOptions: [],
     };
   },
   computed: {
@@ -73,11 +97,17 @@ export default {
       this.dialog = true;
       this.selectedFieldType = type;
       this.selectedOption = "";
+      this.customOptions = [];
     },
     closeDialog() {
       this.dialog = false;
       this.fieldLabel = "";
       this.selectedFieldType = null;
+    },
+    addOption() {
+      if (this.customOptions.length < 4) {
+        this.customOptions.push("");
+      }
     },
     saveField() {
       if (this.fieldLabel && this.selectedFieldType) {
@@ -85,6 +115,7 @@ export default {
           type: this.selectedFieldType,
           label: this.fieldLabel,
           option: this.selectedOption,
+          customOptions: this.customOptions.filter((option) => option.trim() !== "")
         };
         this.$emit("field-saved", field);
         this.closeDialog();

@@ -2,19 +2,45 @@
   <v-select
     outlined
     dense
-    v-model="value"
+    v-model="selectedValues"
     :items="items"
     attach
     chips
-    label="Chips"
+    label="Seleção Múltipla"
     multiple
   ></v-select>
 </template>
+
 <script>
-  export default {
-    data: () => ({
-      items: ['foo', 'bar', 'fizz', 'buzz'],
-      value: ['foo', 'bar', 'fizz', 'buzz'],
-    }),
-  }
+export default {
+  name: 'MultiSelectionField',
+  props: {
+    label: {
+      type: String,
+      required: true
+    },
+    options: {
+      type: Array,
+      required: true,
+    },
+    value: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data() {
+    return {
+      items: this.options,
+      selectedValues: this.value
+    };
+  },
+  watch: {
+    value(newValue) {
+      this.selectedValues = newValue;
+    },
+    selectedValues(newValue) {
+      this.$emit('input', newValue);
+    }
+  },
+};
 </script>

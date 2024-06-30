@@ -1,16 +1,17 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-const LOCAL_STORAGE_KEY = 'formsData';
+const LOCAL_STORAGE_KEY = "formsData";
 
 export const useFormStore = defineStore({
-  id: 'formStore',
+  id: "formStore",
   state: () => ({
     forms: [],
     selectedForm: null,
     fieldTypes: {
       text: {
         title: "Campo de Texto",
-        description: "Um campo que o usuário pode digitar qualquer mensagem que desejar. Especifique o tipo do campo que deseja incluir:",
+        description:
+          "Um campo que o usuário pode digitar qualquer mensagem que desejar. Especifique o tipo do campo que deseja incluir:",
         options: ["Texto curto", "Parágrafo"],
       },
       numeric: {
@@ -20,12 +21,15 @@ export const useFormStore = defineStore({
       },
       selection: {
         title: "Campo Caixa de Seleção",
-        description: "Um campo que o usuário pode selecionar uma ou mais respostas. Escolha qual tipo de campo deseja incluir:",
-        options: ["Escolha única", "Múltipla escolha"],
+        description:
+          "Um campo que o usuário pode selecionar uma ou mais respostas.",
+        options: ["Seleção única", "Múltipla escolha"],
+        selectableOptions: [],
       },
       datetime: {
         title: "Campo Data/Hora",
-        description: "Um campo que o usuário pode selecionar data, hora ou data e hora. Escolha qual tipo de campo deseja incluir:",
+        description:
+          "Um campo que o usuário pode selecionar data, hora ou data e hora. Escolha qual tipo de campo deseja incluir:",
         options: ["Apenas data", "Apenas hora", "Data e hora"],
       },
       color: {
@@ -71,7 +75,7 @@ export const useFormStore = defineStore({
       this.saveForms();
     },
     deleteForm(formId) {
-      this.forms = this.forms.filter(form => form.id !== formId);
+      this.forms = this.forms.filter((form) => form.id !== formId);
       this.saveForms();
     },
     clearSelectedForm() {
