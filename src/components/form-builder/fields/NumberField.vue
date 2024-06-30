@@ -3,7 +3,7 @@
     dense 
     outlined 
     type="number" 
-    label="Numérico" 
+    :label="label" 
     :value="value" 
     @input="onInput"
   ></v-text-field>
@@ -13,6 +13,10 @@
 export default {
   name: 'NumberField',
   props: {
+    label: {
+      type: String,
+      default: "Numérico",
+    },
     value: {
       type: Number,
       default: 0,

@@ -6,7 +6,7 @@
     :items="items"
     attach
     chips
-    label="Seleção Múltipla"
+    :label="label"
     multiple
   ></v-select>
 </template>
@@ -17,7 +17,7 @@ export default {
   props: {
     label: {
       type: String,
-      required: true
+      default: "Múltipla escolha",
     },
     options: {
       type: Array,

@@ -57,6 +57,7 @@ export const useFormStore = defineStore({
       } else {
         this.forms = [];
       }
+      console.log(savedForms)
     },
     saveForms() {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.forms));

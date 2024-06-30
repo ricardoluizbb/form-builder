@@ -1,14 +1,20 @@
 <template>
-    <v-file-input
-      outlined
-      dense
-      chips
-      multiple
-      label="Campo de anexo"
-    ></v-file-input>
+  <v-file-input
+    outlined
+    dense
+    chips
+    multiple
+    :label="label"
+  ></v-file-input>
 </template>
 <script>
 export default {
-    name: 'FileField'
-}
+  name: "FileField",
+  props: {
+    label: {
+      type: String,
+      default: "Anexo",
+    },
+  },
+};
 </script>
