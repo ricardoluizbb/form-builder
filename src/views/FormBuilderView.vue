@@ -14,7 +14,7 @@
       </v-col>
       <v-col cols="6">
         <template v-if="showNewFormComponent">
-          <NewForm @form-saved="hideNewForm" />
+          <BuilderCreateForm @form-saved="hideNewForm" />
         </template>
         <template v-else>
           <BuilderRightColumn :selectedForm="selectedForm" />
@@ -27,7 +27,7 @@
 <script>
 import BuilderLeftColumn from '@/components/form-builder/BuilderLeftColumn.vue';
 import BuilderRightColumn from '@/components/form-builder/BuilderRightColumn.vue';
-import NewForm from '@/components/form-builder/NewForm.vue';
+import BuilderCreateForm from '@/components/form-builder/BuilderCreateForm.vue';
 import { useFormStore } from '@/stores/formStore';
 
 export default {
@@ -35,7 +35,7 @@ export default {
   components: {
     BuilderLeftColumn,
     BuilderRightColumn,
-    NewForm,
+    BuilderCreateForm,
   },
   data() {
     return {

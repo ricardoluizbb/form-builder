@@ -16,7 +16,7 @@
 import { useFormStore } from "@/stores/formStore";
 
 export default {
-  name: "NewForm",
+  name: "BuilderCreateForm",
   data() {
     return {
       newFormTitle: "",
