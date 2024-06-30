@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn width="100%" outlined @click="$emit('new-form')" color="primary">Novo Formulário</v-btn>
+    <v-btn width="100%" outlined @click="$emit('new-form')" color="primary">Criar Formulário</v-btn>
     <v-list dense>
       <v-list-item
         v-for="(form, index) in forms"

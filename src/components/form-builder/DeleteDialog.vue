@@ -1,8 +1,8 @@
 <template>
     <v-dialog v-model="dialog" max-width="400">
       <v-card>
-        <v-card-title class="headline">Excluir Formulário</v-card-title>
-        <v-card-text>Você tem certeza que deseja excluir este formulário?</v-card-text>
+        <v-card-title class="headline">{{ title }}</v-card-title>
+        <v-card-text>{{ message }}</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="primary" text @click="closeDialog">Cancelar</v-btn>
@@ -14,7 +14,17 @@
   
   <script>
   export default {
-    name: "DeleteFormDialog",
+    name: "DeleteDialog",
+    props: {
+      title: {
+        type: String,
+        required: true,
+      },
+      message: {
+        type: String,
+        required: true,
+      },
+    },
     data() {
       return {
         dialog: false,

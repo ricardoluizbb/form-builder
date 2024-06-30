@@ -1,7 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row no-gutters>
-      <!-- Lista de formulários criados -->
+    <v-row>
       <v-col cols="2">
         <BuilderLeftColumn
           :forms="forms"
@@ -10,10 +9,9 @@
           @new-form="showNewForm"
         />
       </v-col>
-      <v-col cols="2">
+      <v-col cols="2" class="fill-height">
         <v-divider vertical></v-divider>
       </v-col>
-      <!-- Formulário selecionado renderizado -->
       <v-col cols="6">
         <template v-if="showNewFormComponent">
           <NewForm @form-saved="hideNewForm" />
@@ -55,7 +53,6 @@ export default {
   },
   methods: {
     selectForm(form) {
-      console.log("chamei")
       this.formStore.selectForm(form);
       this.showNewFormComponent = false;
     },
@@ -73,7 +70,8 @@ export default {
 </script>
 
 <style scoped>
-.active-form {
-  background-color: #f0f0f0;
+.fill-height {
+  height: 100vh;
 }
+
 </style>

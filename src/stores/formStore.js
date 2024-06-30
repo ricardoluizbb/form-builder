@@ -53,7 +53,6 @@ export const useFormStore = defineStore({
       } else {
         this.forms = [];
       }
-      console.log(savedForms)
     },
     saveForms() {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.forms));
@@ -81,6 +80,12 @@ export const useFormStore = defineStore({
     addFieldToSelectedForm(field) {
       if (this.selectedForm) {
         this.selectedForm.fields.push(field);
+        this.saveForms();
+      }
+    },
+    deleteFieldFromSelectedForm(index) {
+      if (this.selectedForm) {
+        this.selectedForm.fields.splice(index, 1);
         this.saveForms();
       }
     },
