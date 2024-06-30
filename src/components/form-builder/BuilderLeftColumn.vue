@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn @click="createNewForm" color="primary">Novo Formulário</v-btn>
+    <v-btn width="100%" outlined @click="$emit('new-form')" color="primary">Criar Formulário</v-btn>
     <v-list dense>
       <v-list-item
         v-for="(form, index) in forms"
@@ -8,7 +8,7 @@
         @click="selectForm(form)"
         :class="{ 'active-form': form === selectedForm }"
       >
-        <v-list-item-title>{{ form.name }}</v-list-item-title>
+        <v-list-item-title>{{ form.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </div>
@@ -31,10 +31,7 @@ export default {
   methods: {
     selectForm(form) {
       this.formStore.selectForm(form);
-      this.$emit("form-selected", form);
-    },
-    createNewForm() {
-      this.formStore.createNewForm();
+      this.$emit('form-selected', form);
     },
   },
 };

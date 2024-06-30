@@ -1,19 +1,24 @@
 <template>
   <v-container fluid>
-    <v-row no-gutters>
-      <!-- Created form list -->
-      <v-col cols="3">
+    <v-row>
+      <v-col cols="2">
         <BuilderLeftColumn
           :forms="forms"
           :selectedForm="selectedForm"
           @form-selected="selectForm"
-          @new-form="createNewForm"
+          @new-form="showNewForm"
         />
       </v-col>
-      <v-divider vertical></v-divider>
-      <!-- Selected form or new form render -->
-      <v-col cols="8">
-        <BuilderRightColumn :selectedForm="selectedForm" />
+      <v-col cols="2" class="fill-height">
+        <v-divider vertical></v-divider>
+      </v-col>
+      <v-col cols="6">
+        <template v-if="showNewFormComponent">
+          <NewForm @form-saved="hideNewForm" />
+        </template>
+        <template v-else>
+          <BuilderRightColumn :selectedForm="selectedForm" />
+        </template>
       </v-col>
     </v-row>
   </v-container>
@@ -22,6 +27,7 @@
 <script>
 import BuilderLeftColumn from '@/components/form-builder/BuilderLeftColumn.vue';
 import BuilderRightColumn from '@/components/form-builder/BuilderRightColumn.vue';
+import NewForm from '@/components/form-builder/NewForm.vue';
 import { useFormStore } from '@/stores/formStore';
 
 export default {
@@ -29,10 +35,12 @@ export default {
   components: {
     BuilderLeftColumn,
     BuilderRightColumn,
+    NewForm,
   },
   data() {
     return {
       formStore: useFormStore(),
+      showNewFormComponent: false,
     };
   },
   computed: {
@@ -46,9 +54,13 @@ export default {
   methods: {
     selectForm(form) {
       this.formStore.selectForm(form);
+      this.showNewFormComponent = false;
     },
-    createNewForm() {
-      this.formStore.createNewForm();
+    showNewForm() {
+      this.showNewFormComponent = true;
+    },
+    hideNewForm() {
+      this.showNewFormComponent = false;
     },
   },
   mounted() {
@@ -58,7 +70,8 @@ export default {
 </script>
 
 <style scoped>
-.active-form {
-  background-color: #f0f0f0;
+.fill-height {
+  height: 100vh;
 }
+
 </style>

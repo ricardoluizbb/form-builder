@@ -1,0 +1,27 @@
+<template>
+  <v-textarea
+    outlined
+    dense
+    :maxlength="500"
+    counter="500"
+    :label="label"
+    :value="value"
+    @input="$emit('update:value', $event)"
+  />
+</template>
+
+<script>
+export default {
+  name: "TextareaField",
+  props: {
+    label: {
+      type: String,
+      default: "Parágrafo",
+    },
+    value: {
+      type: String,
+      default: "",
+    },
+  },
+};
+</script>
