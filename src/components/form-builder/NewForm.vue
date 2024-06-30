@@ -33,7 +33,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Adicione aqui o seu estilo, se necessário */
-</style>

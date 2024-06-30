@@ -59,7 +59,7 @@ import MonetaryField from "./fields/MonetaryField.vue";
 import SelectionField from "./fields/SelectionField.vue";
 import MultiSelectionField from "./fields/MultiSelectionField.vue";
 import ColorField from "./fields/ColorField.vue";
-import DeleteDialog from "./DeleteDialog.vue";
+import DeleteDialog from "../shared/DeleteDialog.vue";
 
 export default {
   name: "BuilderRightColumn",
