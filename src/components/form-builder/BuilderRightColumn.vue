@@ -33,7 +33,7 @@
         </v-menu>
       </div>
     </div>
-    <div v-else>
+    <div class="text-center" v-else>
       <p>Selecione um formulário para visualizar aqui.</p>
     </div>
     <DeleteDialog 
