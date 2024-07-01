@@ -1,46 +1,80 @@
 <template>
   <div>
     <div v-if="builderFormStore.selectedForm">
-      <h2 class="mb-8">{{ builderFormStore.selectedForm.title }}</h2>
+      <h2 class="mb-8">
+        <div class="d-flex">
+          <span v-if="!editingTitle">{{ builderFormStore.selectedForm.title }}</span>
+
+          <v-text-field
+            v-else
+            full-width
+            v-model="editedTitle"
+            dense
+            outlined
+          ></v-text-field>
+
+          <v-btn class="ml-2" icon @click="toggleEditTitle">
+            <v-icon size="20">{{
+              editingTitle ? "mdi-check" : "mdi-pencil"
+            }}</v-icon>
+          </v-btn>
+        </div>
+      </h2>
       <v-row class="mb-4">
         <FieldsMenu @field-selected="addField" />
-        <v-btn class="ml-4" color="red darken-1" outlined @click="openDeleteFormDialog">Excluir formulário</v-btn>
-      </v-row>
-      <div v-for="(field, index) in builderFormStore.selectedForm.fields" :key="index" class="d-flex align-center">
-        <component
-          :is="field.component"
-          :label="field.label"
-          v-model="field.value"
-          :options="field.options"
-        />
-        <v-menu
-          offset-y
-          class="ml-2"
+        <v-btn
+          class="ml-4"
+          color="red darken-1"
+          outlined
+          @click="openDeleteFormDialog"
+          >Excluir formulário</v-btn
         >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn class="align-self-start" dense icon color="grey" v-bind="attrs" v-on="on">
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item @click="editField(index)">
-              <v-list-item-title>Editar</v-list-item-title>
-            </v-list-item>
-            <v-list-item @click="confirmDeleteField(index)">
-              <v-list-item-title>Excluir</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
+      </v-row>
+      <div>
+        <div
+          v-for="(field, index) in builderFormStore.selectedForm.fields"
+          :key="index"
+          class="d-flex align-center"
+        >
+          <component
+            :is="field.component"
+            :label="field.label"
+            v-model="field.value"
+            :options="field.options"
+          />
+          <v-menu offset-y class="ml-2">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                class="align-self-start"
+                dense
+                icon
+                color="grey"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="editField(index)">
+                <v-list-item-title>Editar</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="confirmDeleteField(index)">
+                <v-list-item-title>Excluir</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
       </div>
     </div>
     <div class="text-center" v-else>
       <p>Selecione um formulário para visualizar aqui.</p>
     </div>
-    <DeleteDialog 
-      ref="deleteDialog" 
-      :title="deleteDialogTitle" 
-      :message="deleteDialogMessage" 
-      @confirm-delete="handleConfirmDelete" 
+    <DeleteDialog
+      ref="deleteDialog"
+      :title="deleteDialogTitle"
+      :message="deleteDialogMessage"
+      @confirm-delete="handleConfirmDelete"
     />
   </div>
 </template>
@@ -82,9 +116,11 @@ export default {
     return {
       builderFormStore: useFormStore(),
       fieldIndexToDelete: null,
-      deleteDialogTitle: '',
-      deleteDialogMessage: '',
-      deleteType: '',
+      deleteDialogTitle: "",
+      deleteDialogMessage: "",
+      deleteType: "",
+      editingTitle: false,
+      editedTitle: "",
     };
   },
   methods: {
@@ -95,7 +131,7 @@ export default {
           label: field.label,
           component: this.getFieldComponent(field),
           value,
-          options: field.customOptions
+          options: field.customOptions,
         });
         this.builderFormStore.saveForms();
       }
@@ -106,7 +142,7 @@ export default {
         case "currency":
           return 0;
         case "selection":
-          return field.option == "Múltipla escolha" ? [] : ""
+          return field.option == "Múltipla escolha" ? [] : "";
         default:
           return "";
       }
@@ -116,7 +152,9 @@ export default {
         case "text":
           return field.option === "Texto curto" ? "TextField" : "TextareaField";
         case "selection":
-          return field.option == "Seleção única" ? "SelectionField" : "MultiSelectionField"
+          return field.option == "Seleção única"
+            ? "SelectionField"
+            : "MultiSelectionField";
         case "datetime":
           if (field.option === "Apenas data") return "DateField";
           if (field.option === "Apenas hora") return "TimeField";
@@ -135,9 +173,10 @@ export default {
       }
     },
     openDeleteFormDialog() {
-      this.deleteDialogTitle = 'Excluir Formulário';
-      this.deleteDialogMessage = 'Tem certeza que deseja excluir este formulário?';
-      this.deleteType = 'form';
+      this.deleteDialogTitle = "Excluir Formulário";
+      this.deleteDialogMessage =
+        "Tem certeza que deseja excluir este formulário?";
+      this.deleteType = "form";
       this.$refs.deleteDialog.openDialog();
     },
     deleteForm() {
@@ -151,22 +190,37 @@ export default {
     },
     confirmDeleteField(index) {
       this.fieldIndexToDelete = index;
-      this.deleteDialogTitle = 'Excluir Campo';
-      this.deleteDialogMessage = 'Tem certeza que deseja excluir este campo?';
-      this.deleteType = 'field';
+      this.deleteDialogTitle = "Excluir Campo";
+      this.deleteDialogMessage = "Tem certeza que deseja excluir este campo?";
+      this.deleteType = "field";
       this.$refs.deleteDialog.openDialog();
     },
     deleteField() {
       if (this.fieldIndexToDelete !== null) {
-        this.builderFormStore.deleteFieldFromSelectedForm(this.fieldIndexToDelete);
+        this.builderFormStore.deleteFieldFromSelectedForm(
+          this.fieldIndexToDelete
+        );
         this.fieldIndexToDelete = null;
       }
     },
     handleConfirmDelete() {
-      if (this.deleteType === 'form') {
+      if (this.deleteType === "form") {
         this.deleteForm();
-      } else if (this.deleteType === 'field') {
+      } else if (this.deleteType === "field") {
         this.deleteField();
+      }
+    },
+    toggleEditTitle() {
+      if (this.builderFormStore.selectedForm) {
+        if (this.editingTitle) {
+          // Salvar alterações
+          this.builderFormStore.selectedForm.title = this.editedTitle;
+          this.builderFormStore.saveForms();
+        } else {
+          // Entrar no modo de edição
+          this.editedTitle = this.builderFormStore.selectedForm.title;
+        }
+        this.editingTitle = !this.editingTitle;
       }
     },
   },
