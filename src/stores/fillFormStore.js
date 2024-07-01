@@ -8,6 +8,7 @@ export const useFillFormStore = defineStore({
   }),
   getters: {
     getForms() {
+      this.formStore.loadForms()
       return this.formStore.forms;
     },
   },
