@@ -3,7 +3,9 @@
     <div v-if="builderFormStore.selectedForm">
       <h2 class="mb-8">
         <div class="d-flex">
-          <span v-if="!editingTitle">{{ builderFormStore.selectedForm.title }}</span>
+          <span v-if="!editingTitle">{{
+            builderFormStore.selectedForm.title
+          }}</span>
 
           <v-text-field
             v-else
@@ -56,9 +58,6 @@
               </v-btn>
             </template>
             <v-list>
-              <v-list-item @click="editField(index)">
-                <v-list-item-title>Editar</v-list-item-title>
-              </v-list-item>
               <v-list-item @click="confirmDeleteField(index)">
                 <v-list-item-title>Excluir</v-list-item-title>
               </v-list-item>
@@ -184,9 +183,6 @@ export default {
         this.builderFormStore.deleteForm(this.builderFormStore.selectedForm.id);
         this.builderFormStore.clearSelectedForm();
       }
-    },
-    editField(index) {
-      console.log("editando", index);
     },
     confirmDeleteField(index) {
       this.fieldIndexToDelete = index;
