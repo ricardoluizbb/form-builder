@@ -19,18 +19,18 @@ import { useFormStore } from '@/stores/formStore';
 
 export default {
   name: 'BuilderLeftColumn',
+  data() {
+    return {
+      builderFormStore: useFormStore()
+    }
+  },
   props: {
     forms: Array,
     selectedForm: Object,
   },
-  computed: {
-    formStore() {
-      return useFormStore();
-    },
-  },
   methods: {
     selectForm(form) {
-      this.formStore.selectForm(form);
+      this.builderFormStore.selectForm(form);
       this.$emit('form-selected', form);
     },
   },

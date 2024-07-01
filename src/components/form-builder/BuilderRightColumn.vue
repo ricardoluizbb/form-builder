@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-if="selectedForm">
-      <h2 class="mb-8">{{ selectedForm.title }}</h2>
+    <div v-if="builderFormStore.selectedForm">
+      <h2 class="mb-8">{{ builderFormStore.selectedForm.title }}</h2>
       <v-row class="mb-4">
         <FieldsMenu @field-selected="addField" />
         <v-btn class="ml-4" color="red darken-1" outlined @click="openDeleteFormDialog">Excluir formulário</v-btn>
       </v-row>
-      <div v-for="(field, index) in selectedForm.fields" :key="index" class="d-flex align-center">
+      <div v-for="(field, index) in builderFormStore.selectedForm.fields" :key="index" class="d-flex align-center">
         <component
           :is="field.component"
           :label="field.label"
@@ -80,29 +80,24 @@ export default {
   },
   data() {
     return {
-      formStore: useFormStore(),
+      builderFormStore: useFormStore(),
       fieldIndexToDelete: null,
       deleteDialogTitle: '',
       deleteDialogMessage: '',
       deleteType: '',
     };
   },
-  computed: {
-    selectedForm() {
-      return this.formStore.selectedForm;
-    },
-  },
   methods: {
     addField(field) {
-      if (this.selectedForm) {
+      if (this.builderFormStore.selectedForm) {
         const value = this.getInitialValue(field);
-        this.selectedForm.fields.push({
+        this.builderFormStore.selectedForm.fields.push({
           label: field.label,
           component: this.getFieldComponent(field),
           value,
           options: field.customOptions
         });
-        this.formStore.saveForms();
+        this.builderFormStore.saveForms();
       }
     },
     getInitialValue(field) {
@@ -146,9 +141,9 @@ export default {
       this.$refs.deleteDialog.openDialog();
     },
     deleteForm() {
-      if (this.selectedForm) {
-        this.formStore.deleteForm(this.selectedForm.id);
-        this.formStore.clearSelectedForm();
+      if (this.builderFormStore.selectedForm) {
+        this.builderFormStore.deleteForm(this.builderFormStore.selectedForm.id);
+        this.builderFormStore.clearSelectedForm();
       }
     },
     editField(index) {
@@ -163,7 +158,7 @@ export default {
     },
     deleteField() {
       if (this.fieldIndexToDelete !== null) {
-        this.formStore.deleteFieldFromSelectedForm(this.fieldIndexToDelete);
+        this.builderFormStore.deleteFieldFromSelectedForm(this.fieldIndexToDelete);
         this.fieldIndexToDelete = null;
       }
     },
