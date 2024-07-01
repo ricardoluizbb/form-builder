@@ -7,7 +7,7 @@
 
       <v-list>
         <v-list-item
-          v-for="form in forms"
+          v-for="form in filteredForms"
           :key="form.id"
           @click="addFormToList(form)"
         >
@@ -45,6 +45,12 @@ export default {
   computed: {
     forms() {
       return this.fillFormStore.getForms;
+    },
+    filledForms() {
+      return this.fillFormStore.fillFormsList;
+    },
+    filteredForms() {
+      return this.forms.filter(form => !this.filledForms.includes(form));
     },
   },
   watch: {
