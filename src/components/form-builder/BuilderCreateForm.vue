@@ -16,17 +16,17 @@
 import { useFormStore } from "@/stores/formStore";
 
 export default {
-  name: "NewForm",
+  name: "BuilderCreateForm",
   data() {
     return {
+      builderFormStore: useFormStore(),
       newFormTitle: "",
     };
   },
   methods: {
     saveForm() {
       if (this.newFormTitle.trim() !== "") {
-        const formStore = useFormStore();
-        formStore.createNewForm(this.newFormTitle);
+        this.builderFormStore.createNewForm(this.newFormTitle);
         this.$emit("form-saved");
       }
     },

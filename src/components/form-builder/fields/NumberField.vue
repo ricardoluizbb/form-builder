@@ -6,6 +6,7 @@
     :label="label" 
     :value="value" 
     @input="onInput"
+    :disabled="disabled"
   ></v-text-field>
 </template>
 
@@ -20,6 +21,10 @@ export default {
     value: {
       type: Number,
       default: 0,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {

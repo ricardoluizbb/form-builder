@@ -1,5 +1,5 @@
 <template>
-  <v-text-field dense outlined type="datetime-local" :label="label"></v-text-field>
+  <v-text-field :disabled="disabled" dense outlined type="datetime-local" :label="label"></v-text-field>
 </template>
 
 <script>
@@ -9,6 +9,10 @@ export default {
     label: {
       type: String,
       default: "Data e hora",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 }
