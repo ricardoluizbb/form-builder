@@ -5,6 +5,7 @@
     chips
     multiple
     :label="label"
+    :disabled="disabled"
   ></v-file-input>
 </template>
 <script>
@@ -14,6 +15,10 @@ export default {
     label: {
       type: String,
       default: "Anexo",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 };

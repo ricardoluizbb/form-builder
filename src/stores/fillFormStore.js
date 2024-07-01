@@ -35,5 +35,12 @@ export const useFillFormStore = defineStore({
     selectForm(form) {
       this.selectedForm = form;
     },
+    deleteForm(form) {
+      this.fillFormsList = this.fillFormsList.filter(f => f !== form);
+      this.saveFillFormsList();
+      if (this.selectedForm === form) {
+        this.selectedForm = null;
+      }
+    },
   },
 });

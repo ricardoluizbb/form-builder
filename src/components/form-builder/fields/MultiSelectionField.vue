@@ -8,6 +8,7 @@
     chips
     :label="label"
     multiple
+    :disabled="disabled"
   ></v-select>
 </template>
 
@@ -26,7 +27,11 @@ export default {
     value: {
       type: Array,
       default: () => []
-    }
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {

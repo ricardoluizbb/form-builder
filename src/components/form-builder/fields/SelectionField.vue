@@ -1,5 +1,5 @@
 <template>
-  <v-select dense :items="items" :label="label" outlined v-model="selectedValue"></v-select>
+  <v-select :disabled="disabled" dense :items="items" :label="label" outlined v-model="selectedValue"></v-select>
 </template>
 
 <script>
@@ -17,7 +17,11 @@ export default {
     value: {
       type: [String, Number],
       default: ''
-    }
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {

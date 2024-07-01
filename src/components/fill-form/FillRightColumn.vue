@@ -1,19 +1,45 @@
 <template>
   <div>
     <div v-if="selectedForm">
-      <h2>{{ selectedForm.title }}</h2>
+      <h2 class="mb-4">{{ selectedForm.title }}</h2>
+      <div class="mb-4">
+        <v-btn color="primary" @click="toggleEditMode">
+          {{ isEditing ? 'Salvar formulário' : 'Editar formulário' }}
+        </v-btn>
+        <v-btn
+          class="ml-4"
+          color="red darken-1"
+          outlined
+          @click="openDeleteFormDialog"
+        >Excluir formulário
+        </v-btn>
+      </div>
       <div v-for="(field, index) in selectedForm.fields" :key="index" class="d-flex align-center">
         <component
           :is="field.component"
           :label="field.label"
           v-model="field.value"
           :options="field.options"
+          :disabled="!isEditing"
         />
       </div>
     </div>
     <div v-else class="text-center">
       <p>Selecione um formulário para visualizar aqui.</p>
     </div>
+
+    <!-- Snackbar -->
+    <v-snackbar v-model="snackbar" :timeout="3000">
+      {{ snackbarMessage }}
+    </v-snackbar>
+
+    <!-- Delete Dialog -->
+    <delete-dialog
+      ref="deleteDialog"
+      title="Excluir Formulário"
+      message="Você tem certeza que deseja excluir este formulário?"
+      @confirm-delete="deleteForm"
+    />
   </div>
 </template>
 
@@ -38,11 +64,41 @@ export default {
   data() {
     return {
       fillFormStore: useFillFormStore(),
+      isEditing: true,
+      snackbar: false,
+      snackbarMessage: '',
     };
   },
   computed: {
     selectedForm() {
       return this.fillFormStore.selectedForm;
+    },
+  },
+  watch: {
+    selectedForm(newForm, oldForm) {
+      if (newForm && newForm !== oldForm) {
+        this.isEditing = true;
+      }
+    },
+  },
+  methods: {
+    toggleEditMode() {
+      if (this.isEditing) {
+        this.fillFormStore.saveFillFormsList();
+        this.showSnackbar("Formulário salvo com sucesso");
+      }
+      this.isEditing = !this.isEditing;
+    },
+    showSnackbar(message) {
+      this.snackbarMessage = message;
+      this.snackbar = true;
+    },
+    openDeleteFormDialog() {
+      this.$refs.deleteDialog.openDialog();
+    },
+    deleteForm() {
+      this.fillFormStore.deleteForm(this.selectedForm);
+      this.showSnackbar("Formulário excluído com sucesso");
     },
   },
   components: {

@@ -1,8 +1,18 @@
 <template>
-    <v-color-picker hide-inputs show-swatches></v-color-picker>
+  <v-color-picker
+    :disabled="disabled"
+    hide-inputs
+    show-swatches
+  ></v-color-picker>
 </template>
 <script>
 export default {
-    name: 'ColorField'
-}
+  name: "ColorField",
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
 </script>

@@ -8,6 +8,7 @@
     :label="label"
     :value="value"
     @input="$emit('update:value', $event)"
+    :disabled="disabled"
   ></v-text-field>
 </template>
 
@@ -26,6 +27,10 @@ export default {
     value: {
       type: String,
       default: "",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 };
