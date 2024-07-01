@@ -10,7 +10,7 @@
       </v-col>
 
       <v-col cols="6">
-        <!-- o resto aqui -->
+        <FillRightColumn />
       </v-col>
     </v-row>
   </v-container>
@@ -18,12 +18,14 @@
 
 <script>
 import FillLeftColumn from "@/components/fill-form/FillLeftColumn.vue";
+import FillRightColumn from "@/components/fill-form/FillRightColumn.vue";
 import { useFormStore } from "@/stores/formStore";
 
 export default {
   name: "FillFormView",
   components: {
     FillLeftColumn,
+    FillRightColumn
   },
   data() {
     return {

@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       dialog: false,
+      fillFormStore: useFillFormStore()
     };
   },
   components: {
@@ -38,11 +39,8 @@ export default {
       return this.fillFormStore.fillFormsList;
     },
     selectedForm() {
-      return this.fillFormStore.formStore.selectedForm;
+      return this.fillFormStore.selectedForm;
     },
-    fillFormStore() {
-      return useFillFormStore();
-    }
   },
   methods: {
     selectForm(form) {
