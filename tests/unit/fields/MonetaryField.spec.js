@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from '@vue/test-utils'
-import MonetaryField from '@/components/form-builder/fields/MonetaryField.vue'
+import MonetaryField from '@/components/fields/MonetaryField.vue'
 
 const localVue = createLocalVue()
 

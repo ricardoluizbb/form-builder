@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import MultiSelectionField from '@/components/form-builder/fields/MultiSelectionField.vue';
+import MultiSelectionField from '@/components/fields/MultiSelectionField.vue';
 
 describe('MultiSelectionField', () => {
   it('renders correctly with default props', () => {

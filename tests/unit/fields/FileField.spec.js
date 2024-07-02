@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import FileField from '@/components/form-builder/fields/FileField.vue'
+import FileField from '@/components/fields/FileField.vue'
 
 const localVue = createLocalVue()
 

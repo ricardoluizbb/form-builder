@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import ColorField from '@/components/form-builder/fields/ColorField.vue'
+import ColorField from '@/components/fields/ColorField.vue'
 
 const localVue = createLocalVue()
 

@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import DateTimeField from '@/components/form-builder/fields/DateTimeField.vue'
+import DateTimeField from '@/components/fields/DateTimeField.vue'
 
 const localVue = createLocalVue()
 

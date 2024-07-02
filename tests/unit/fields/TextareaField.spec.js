@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import TextareaField from '@/components/form-builder/fields/TextareaField.vue';
+import TextareaField from '@/components/fields/TextareaField.vue';
 
 describe('TimeField', () => {
   it('renders correctly with default props', () => {

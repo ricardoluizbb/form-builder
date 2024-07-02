@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import SelectionField from '@/components/form-builder/fields/SelectionField.vue';
+import SelectionField from '@/components/fields/SelectionField.vue';
 
 describe('SelectionField', () => {
   it('renders correctly with default props', () => {

@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import NumberField from '@/components/form-builder/fields/NumberField.vue';
+import NumberField from '@/components/fields/NumberField.vue';
 
 describe('NumberField', () => {
     
