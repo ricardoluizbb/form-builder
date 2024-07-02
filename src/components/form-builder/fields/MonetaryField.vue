@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    id="monetary-field"
     outlined
     dense
     :label="label"

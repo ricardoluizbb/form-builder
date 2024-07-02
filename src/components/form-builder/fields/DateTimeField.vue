@@ -1,10 +1,17 @@
 <template>
-  <v-text-field :disabled="disabled" dense outlined type="datetime-local" :label="label"></v-text-field>
+  <v-text-field
+    id="date-time"
+    :disabled="disabled"
+    dense
+    outlined
+    type="datetime-local"
+    :label="label"
+  ></v-text-field>
 </template>
 
 <script>
 export default {
-  name: 'DateTimeField',
+  name: "DateTimeField",
   props: {
     label: {
       type: String,
@@ -15,5 +22,5 @@ export default {
       default: false,
     },
   },
-}
+};
 </script>

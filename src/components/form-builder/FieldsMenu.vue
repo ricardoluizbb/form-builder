@@ -31,11 +31,11 @@ export default {
   data() {
     return {
       items: [
-        { title: "Campo de texto", type: "text" }, // texto simples ou parágrafo
+        { title: "Campo de texto", type: "text" },
         { title: "Numérico", type: "numeric" },
-        { title: "Caixa de seleção", type: "selection" }, // opção unica ou multipla escolha
+        { title: "Caixa de seleção", type: "selection" },
         { title: "Anexo", type: "file" },
-        { title: "Data/hora", type: "datetime" }, // data, hora ou data e hora
+        { title: "Data/hora", type: "datetime" },
         { title: "Cor", type: "color" },
         { title: "Valor monetário", type: "currency" },
       ],

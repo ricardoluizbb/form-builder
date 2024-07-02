@@ -1,5 +1,6 @@
 <template>
   <v-select
+    id="multi-selection"
     outlined
     dense
     v-model="selectedValues"
@@ -45,6 +46,9 @@ export default {
     },
     selectedValues(newValue) {
       this.$emit('input', newValue);
+    },
+    options(newOptions) {
+      this.items = newOptions;
     }
   },
 };

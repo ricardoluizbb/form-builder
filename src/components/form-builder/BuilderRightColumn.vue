@@ -213,7 +213,7 @@ export default {
           this.builderFormStore.selectedForm.title = this.editedTitle;
           this.builderFormStore.saveForms();
         } else {
-          // Entrar no modo de edição
+          // Modo de edição
           this.editedTitle = this.builderFormStore.selectedForm.title;
         }
         this.editingTitle = !this.editingTitle;

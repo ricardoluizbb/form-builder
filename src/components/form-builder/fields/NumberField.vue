@@ -1,10 +1,10 @@
 <template>
-  <v-text-field 
-    dense 
-    outlined 
-    type="number" 
-    :label="label" 
-    :value="value" 
+  <v-text-field
+    dense
+    outlined
+    type="number"
+    :label="label"
+    :value="value"
     @input="onInput"
     :disabled="disabled"
   ></v-text-field>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'NumberField',
+  name: "NumberField",
   props: {
     label: {
       type: String,
@@ -29,9 +29,11 @@ export default {
   },
   methods: {
     onInput(event) {
-      const value = parseFloat(event.target.value);
-      this.$emit('update:value', isNaN(value) ? 0 : value);
-    }
-  }
+      if (event && event.target) {
+        const value = parseFloat(event.target.value);
+        this.$emit("update:value", isNaN(value) ? 0 : value);
+      }
+    },
+  },
 };
 </script>

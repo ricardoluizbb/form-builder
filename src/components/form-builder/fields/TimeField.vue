@@ -5,6 +5,7 @@
     outlined
     type="time"
     :label="label"
+    id="time-field"
   ></v-text-field>
 </template>
 
