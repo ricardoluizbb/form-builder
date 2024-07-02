@@ -23,7 +23,7 @@
         </div>
       </h2>
       <v-row class="mb-4">
-        <FieldsMenu @field-selected="addField" />
+        <NewFieldMenu @field-selected="addField" />
         <v-btn
           class="ml-4"
           color="red darken-1"
@@ -91,14 +91,14 @@ import SelectionField from "../fields/SelectionField.vue";
 import MultiSelectionField from "../fields/MultiSelectionField.vue";
 import ColorField from "../fields/ColorField.vue";
 
-import FieldsMenu from "@/components/form-builder/FieldsMenu.vue";
+import NewFieldMenu from "@/components/form-builder/NewFieldMenu.vue";
 import { useFormStore } from "@/stores/formStore";
 import DeleteDialog from "../shared/DeleteDialog.vue";
 
 export default {
   name: "BuilderRightColumn",
   components: {
-    FieldsMenu,
+    NewFieldMenu,
     NumberField,
     TextField,
     TextareaField,

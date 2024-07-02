@@ -19,7 +19,6 @@
 <script>
 import FillLeftColumn from "@/components/fill-form/FillLeftColumn.vue";
 import FillRightColumn from "@/components/fill-form/FillRightColumn.vue";
-import { useFormStore } from "@/stores/formStore";
 
 export default {
   name: "FillFormView",
@@ -29,7 +28,6 @@ export default {
   },
   data() {
     return {
-      formStore: useFormStore(),
       showNewFormComponent: false,
     };
   },

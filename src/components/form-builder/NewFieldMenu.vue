@@ -24,7 +24,7 @@
 import NewFieldDialog from './NewFieldDialog.vue';
 
 export default {
-  name: 'FieldsMenu',
+  name: 'NewFieldMenu',
   components: {
     NewFieldDialog
   },
