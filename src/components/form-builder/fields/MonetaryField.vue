@@ -3,14 +3,21 @@
     outlined
     dense
     :label="label"
-    value="0,00"
+    v-model="value"
+    v-mask="'#,##'"
     prefix="R$"
     :disabled="disabled"
   ></v-text-field>
 </template>
+
 <script>
+import { VueMaskDirective } from 'v-mask'
+
 export default {
-  name: "TimeField",
+  name: "MonetaryField",
+  directives: {
+    mask: VueMaskDirective
+  },
   props: {
     label: {
       type: String,
@@ -21,5 +28,10 @@ export default {
       default: false,
     },
   },
-};
+  data() {
+    return {
+      value: '0,00',
+    }
+  }
+}
 </script>
