@@ -25,9 +25,6 @@
         />
       </div>
     </div>
-    <div v-else class="text-center">
-      <p>Selecione um formulário para visualizar aqui.</p>
-    </div>
 
     <!-- Snackbar -->
     <v-snackbar v-model="snackbar" :timeout="3000">

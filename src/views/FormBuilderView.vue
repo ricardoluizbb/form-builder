@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="2">
+      <v-col cols="12" md="2">
         <BuilderLeftColumn
           :forms="forms"
           :selectedForm="selectedForm"
@@ -9,10 +9,12 @@
           @new-form="showNewForm"
         />
       </v-col>
-      <v-col cols="2" class="fill-height">
-        <v-divider vertical></v-divider>
+      <v-col cols="12" md="1">
+        <v-divider vertical class="d-none d-md-block"></v-divider>
+        <!-- Use uma divisão horizontal em telas pequenas -->
+        <v-divider class="d-md-none"></v-divider>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="12" md="9">
         <template v-if="showNewFormComponent">
           <BuilderCreateForm @form-saved="hideNewForm" />
         </template>
@@ -73,5 +75,4 @@ export default {
 .fill-height {
   height: 100vh;
 }
-
 </style>

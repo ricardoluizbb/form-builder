@@ -5,7 +5,7 @@
         <FillLeftColumn />
       </v-col>
 
-      <v-col cols="2" class="fill-height">
+      <v-col cols="2">
         <v-divider vertical></v-divider>
       </v-col>
 
@@ -35,7 +35,4 @@ export default {
 </script>
 
 <style scoped>
-.fill-height {
-  height: 100vh;
-}
 </style>
