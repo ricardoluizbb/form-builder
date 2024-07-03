@@ -49,7 +49,8 @@ describe('BuilderRightColumn', () => {
 
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.find('.mb-8 span').text()).toBe('Test Form');
+    
+    expect(wrapper.find('h2.mb-8').text()).toBe('Test Form');
   });
 
   it('adds a field to selected form when addField is called', async () => {
@@ -130,4 +131,3 @@ describe('BuilderRightColumn', () => {
   });
 
 });
-

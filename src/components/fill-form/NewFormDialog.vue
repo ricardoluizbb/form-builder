@@ -5,7 +5,7 @@
         Formulários criados
       </v-card-title>
 
-      <v-list>
+      <v-list v-if="filteredForms.length > 0">
         <v-list-item
           v-for="form in filteredForms"
           :key="form.id"
@@ -14,6 +14,10 @@
           <v-list-item-title id="form-title" class="primary--text">{{ form.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
+
+      <v-card-text class="mt-2 text-subtitle" v-else>
+        Não há formulários disponíveis.
+      </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>

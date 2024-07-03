@@ -1,5 +1,6 @@
 <template>
   <v-color-picker
+    class="mb-4"
     id="color-field"
     :disabled="disabled"
     hide-inputs

@@ -1,33 +1,29 @@
 <template>
   <div>
     <div v-if="builderFormStore.selectedForm">
-      <h2 class="mb-8">
-        <div class="d-flex">
-          <span v-if="!editingTitle">{{
-            builderFormStore.selectedForm.title
-          }}</span>
+      <div class="d-flex">
+        <h2 class="mb-8" v-if="!editingTitle">
+          {{ builderFormStore.selectedForm.title }}
+        </h2>
 
-          <v-text-field
-            v-else
-            full-width
-            v-model="editedTitle"
-            dense
-            outlined
-          ></v-text-field>
+        <v-text-field
+          v-else
+          full-width
+          v-model="editedTitle"
+          dense
+          outlined
+        ></v-text-field>
 
-          <v-btn class="ml-2" icon @click="toggleEditTitle">
-            <v-icon size="20">{{
-              editingTitle ? "mdi-check" : "mdi-pencil"
-            }}</v-icon>
-          </v-btn>
-        </div>
-      </h2>
+        <v-btn class="ml-2" icon @click="toggleEditTitle">
+          <v-icon size="20">{{
+            editingTitle ? "mdi-check" : "mdi-pencil"
+          }}</v-icon>
+        </v-btn>
+      </div>
+
       <v-row class="mb-4">
         <NewFieldMenu @field-selected="addField" />
-        <v-btn
-          color="red darken-1"
-          outlined
-          @click="openDeleteFormDialog"
+        <v-btn color="red darken-1" outlined @click="openDeleteFormDialog"
           >Excluir formulário</v-btn
         >
       </v-row>
@@ -204,17 +200,14 @@ export default {
       }
     },
     toggleEditTitle() {
-      if (this.builderFormStore.selectedForm) {
-        if (this.editingTitle) {
-          // Salvar alterações
-          this.builderFormStore.selectedForm.title = this.editedTitle;
-          this.builderFormStore.saveForms();
-        } else {
-          // Modo de edição
-          this.editedTitle = this.builderFormStore.selectedForm.title;
-        }
-        this.editingTitle = !this.editingTitle;
+      if (!this.builderFormStore.selectedForm) return;
+      if (this.editingTitle) {
+        this.builderFormStore.selectedForm.title = this.editedTitle;
+        this.builderFormStore.saveForms();
+      } else {
+        this.editedTitle = this.builderFormStore.selectedForm.title;
       }
+      this.editingTitle = !this.editingTitle;
     },
   },
 };
