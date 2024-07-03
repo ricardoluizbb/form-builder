@@ -29,6 +29,7 @@ O projeto foi separado em três tipos de componentes, sendo eles:
   - form-builder: responsável pela parte de criação do formulário.
   - fill-form: responsável pelo preenchimento do formulário escolhido
   - fields: todos os campos que o formulário pode conter.
+  - shared: componentes utilizados ou aparecem em diversos lugares diferentes do projeto.
 
 Dessa maneira, fica mais simples de implementar novas funcionalidades ou alterar qualquer regra de negócio de cada um dos campos.
 
