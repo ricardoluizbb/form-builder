@@ -1,4 +1,3 @@
-// Importações necessárias
 import { mount, createLocalVue } from '@vue/test-utils';
 import BuilderRightColumn from '@/components/form-builder/BuilderRightColumn.vue';
 import Vuetify from 'vuetify';
@@ -32,15 +31,6 @@ describe('BuilderRightColumn', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it('renders "Selecione um formulário para visualizar aqui." when no form is selected', () => {
-    const wrapper = mount(BuilderRightColumn, {
-      localVue,
-      vuetify,
-    });
-
-    expect(wrapper.find('.text-center').text()).toContain('Selecione um formulário para visualizar aqui.');
   });
 
   it('renders selected form details when a form is selected', async () => {

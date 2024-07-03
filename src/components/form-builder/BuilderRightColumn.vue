@@ -25,7 +25,6 @@
       <v-row class="mb-4">
         <NewFieldMenu @field-selected="addField" />
         <v-btn
-          class="ml-4"
           color="red darken-1"
           outlined
           @click="openDeleteFormDialog"
@@ -65,9 +64,6 @@
           </v-menu>
         </div>
       </div>
-    </div>
-    <div class="text-center" v-else>
-      <p>Selecione um formulário para visualizar aqui.</p>
     </div>
     <DeleteDialog
       ref="deleteDialog"

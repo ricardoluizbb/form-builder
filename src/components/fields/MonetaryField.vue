@@ -4,7 +4,7 @@
     outlined
     dense
     :label="label"
-    v-model="value"
+    v-model="formattedValue"
     v-mask="'#,##'"
     prefix="R$"
     :disabled="disabled"
@@ -32,6 +32,21 @@ export default {
   data() {
     return {
       value: '0,00',
+    }
+  },
+  computed: {
+    // Mostra a interface com máscara mas salva o o valor como inteiro
+    formattedValue: {
+      get() {
+        if (this.disabled) {
+          const [integerPart] = this.value.split(',');
+          return integerPart;
+        }
+        return this.value;
+      },
+      set(newValue) {
+        this.value = newValue;
+      }
     }
   }
 }
