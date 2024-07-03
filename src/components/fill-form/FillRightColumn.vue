@@ -7,6 +7,7 @@
           {{ isEditing ? 'Salvar formulário' : 'Editar formulário' }}
         </v-btn>
         <v-btn
+          id="delete-form-btn"
           class="ml-4"
           color="red darken-1"
           outlined
@@ -46,17 +47,17 @@
 <script>
 import { useFillFormStore } from "@/stores/fillFormStore";
 
-import NumberField from "../form-builder/fields/NumberField.vue";
-import TextField from "../form-builder/fields/TextField.vue";
-import TextareaField from "../form-builder/fields/TextareaField.vue";
-import DateField from "../form-builder/fields/DateField.vue";
-import DateTimeField from "../form-builder/fields/DateTimeField.vue";
-import TimeField from "../form-builder/fields/TimeField.vue";
-import FileField from "../form-builder/fields/FileField.vue";
-import MonetaryField from "../form-builder/fields/MonetaryField.vue";
-import SelectionField from "../form-builder/fields/SelectionField.vue";
-import MultiSelectionField from "../form-builder/fields/MultiSelectionField.vue";
-import ColorField from "../form-builder/fields/ColorField.vue";
+import NumberField from "../fields/NumberField.vue";
+import TextField from "../fields/TextField.vue";
+import TextareaField from "../fields/TextareaField.vue";
+import DateField from "../fields/DateField.vue";
+import DateTimeField from "../fields/DateTimeField.vue";
+import TimeField from "../fields/TimeField.vue";
+import FileField from "../fields/FileField.vue";
+import MonetaryField from "../fields/MonetaryField.vue";
+import SelectionField from "../fields/SelectionField.vue";
+import ColorField from "../fields/ColorField.vue";
+import MultiSelectionField from "../fields/MultiSelectionField.vue";
 import DeleteDialog from "../shared/DeleteDialog.vue";
 
 export default {

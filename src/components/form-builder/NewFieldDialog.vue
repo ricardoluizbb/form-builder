@@ -51,13 +51,14 @@
       </v-card-text>
       <v-card-actions>
         <v-btn
+          id="save-btn"
           :disabled="!enableSaveButton"
           text
           color="primary"
           @click="saveField"
           >Salvar</v-btn
         >
-        <v-btn text color="red darken-1" @click="closeDialog">Cancelar</v-btn>
+        <v-btn id="cancel-btn" text color="red darken-1" @click="closeDialog">Cancelar</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

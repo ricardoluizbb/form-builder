@@ -1,10 +1,17 @@
 <template>
-  <v-text-field :disabled="disabled" dense outlined type="date" :label="label"></v-text-field>
+  <v-text-field
+    id="date-field"
+    :disabled="disabled"
+    dense
+    outlined
+    type="date"
+    :label="label"
+  ></v-text-field>
 </template>
 
 <script>
 export default {
-  name: 'DateField',
+  name: "DateField",
   props: {
     label: {
       type: String,
@@ -15,5 +22,5 @@ export default {
       default: false,
     },
   },
-}
+};
 </script>

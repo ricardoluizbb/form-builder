@@ -23,7 +23,7 @@
         </div>
       </h2>
       <v-row class="mb-4">
-        <FieldsMenu @field-selected="addField" />
+        <NewFieldMenu @field-selected="addField" />
         <v-btn
           class="ml-4"
           color="red darken-1"
@@ -79,25 +79,26 @@
 </template>
 
 <script>
-import FieldsMenu from "@/components/form-builder/FieldsMenu.vue";
+import NumberField from "../fields/NumberField.vue";
+import TextField from "../fields/TextField.vue";
+import TextareaField from "../fields/TextareaField.vue";
+import DateField from "../fields/DateField.vue";
+import DateTimeField from "../fields/DateTimeField.vue";
+import TimeField from "../fields/TimeField.vue";
+import FileField from "../fields/FileField.vue";
+import MonetaryField from "../fields/MonetaryField.vue";
+import SelectionField from "../fields/SelectionField.vue";
+import MultiSelectionField from "../fields/MultiSelectionField.vue";
+import ColorField from "../fields/ColorField.vue";
+
+import NewFieldMenu from "@/components/form-builder/NewFieldMenu.vue";
 import { useFormStore } from "@/stores/formStore";
-import NumberField from "./fields/NumberField.vue";
-import TextField from "./fields/TextField.vue";
-import TextareaField from "./fields/TextareaField.vue";
-import DateField from "./fields/DateField.vue";
-import DateTimeField from "./fields/DateTimeField.vue";
-import TimeField from "./fields/TimeField.vue";
-import FileField from "./fields/FileField.vue";
-import MonetaryField from "./fields/MonetaryField.vue";
-import SelectionField from "./fields/SelectionField.vue";
-import MultiSelectionField from "./fields/MultiSelectionField.vue";
-import ColorField from "./fields/ColorField.vue";
 import DeleteDialog from "../shared/DeleteDialog.vue";
 
 export default {
   name: "BuilderRightColumn",
   components: {
-    FieldsMenu,
+    NewFieldMenu,
     NumberField,
     TextField,
     TextareaField,
@@ -213,7 +214,7 @@ export default {
           this.builderFormStore.selectedForm.title = this.editedTitle;
           this.builderFormStore.saveForms();
         } else {
-          // Entrar no modo de edição
+          // Modo de edição
           this.editedTitle = this.builderFormStore.selectedForm.title;
         }
         this.editingTitle = !this.editingTitle;

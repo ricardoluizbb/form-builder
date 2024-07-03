@@ -8,6 +8,7 @@
     :value="value"
     @input="$emit('update:value', $event)"
     :disabled="disabled"
+    id="textarea-field"
   />
 </template>
 

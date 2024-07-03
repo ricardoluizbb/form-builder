@@ -1,5 +1,5 @@
 <template>
-  <v-select :disabled="disabled" dense :items="items" :label="label" outlined v-model="selectedValue"></v-select>
+  <v-select id="selection-field" :disabled="disabled" dense :items="items" :label="label" outlined v-model="selectedValue"></v-select>
 </template>
 
 <script>
@@ -35,6 +35,9 @@ export default {
     },
     selectedValue(newValue) {
       this.$emit('input', newValue);
+    },
+    options(newOptions) {
+      this.items = newOptions;
     }
   }
 };

@@ -9,6 +9,7 @@
     :value="value"
     @input="$emit('update:value', $event)"
     :disabled="disabled"
+    id="text-field"
   ></v-text-field>
 </template>
 

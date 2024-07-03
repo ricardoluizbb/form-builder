@@ -1,5 +1,6 @@
 <template>
   <v-file-input
+    id="file-field"
     outlined
     dense
     chips
