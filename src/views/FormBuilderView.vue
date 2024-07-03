@@ -11,7 +11,7 @@
       </v-col>
       <v-col cols="12" md="1">
         <v-divider vertical class="d-none d-md-block"></v-divider>
-        <!-- Use uma divisão horizontal em telas pequenas -->
+        <!-- divider na horizontal em telas pequenas -->
         <v-divider class="d-md-none"></v-divider>
       </v-col>
       <v-col cols="12" md="9">

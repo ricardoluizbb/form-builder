@@ -42,5 +42,8 @@ export const useFillFormStore = defineStore({
         this.selectedForm = null;
       }
     },
+    clearSelectedForm() {
+      this.selectedForm = null;
+    }
   },
 });
