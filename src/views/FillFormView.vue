@@ -1,28 +1,27 @@
 <template>
   <v-container fluid>
     <v-row>
-      <!-- Left Column for Larger Screens -->
+      <!-- Coluna esquerda para desktop -->
       <v-col cols="12" md="2" class="hidden-sm-and-down">
         <FillLeftColumn />
       </v-col>
 
-      <!-- Divider for Larger Screens -->
       <v-col cols="12" md="1" class="fill-height hidden-sm-and-down">
         <v-divider vertical></v-divider>
       </v-col>
 
-      <!-- Right Column for Larger Screens -->
+      <!-- Coluna da direita para desktop -->
       <v-col cols="12" md="9" class="hidden-sm-and-down">
         <FillRightColumn />
       </v-col>
 
-      <!-- List of Forms for Small Screens -->
+      <!-- Lista de form para mobile -->
       <v-col cols="12" class="hidden-md-and-up">
-        <template v-if="!selectedForm">
-          <FillLeftColumn @form-selected="selectForm" />
+        <template v-if="!fillFormStore.selectedForm">
+          <FillLeftColumn />
         </template>
         <template v-else>
-          <v-btn icon @click="clearSelectedForm">
+          <v-btn icon @click="fillFormStore.clearSelectedForm">
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
           <FillRightColumn />
@@ -39,26 +38,14 @@ import { useFillFormStore } from "@/stores/fillFormStore";
 
 export default {
   name: "FillFormView",
+  data() {
+    return {
+      fillFormStore: useFillFormStore()
+    }
+  },
   components: {
     FillLeftColumn,
     FillRightColumn,
-  },
-  computed: {
-    selectedForm() {
-      return this.fillFormStore.selectedForm;
-    },
-  },
-  methods: {
-    selectForm(form) {
-      this.fillFormStore.selectForm(form);
-    },
-    clearSelectedForm() {
-      this.fillFormStore.clearSelectedForm();
-    },
-  },
-  setup() {
-    const fillFormStore = useFillFormStore();
-    return { fillFormStore };
   },
 };
 </script>

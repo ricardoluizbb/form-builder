@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="selectedForm">
-      <h2 class="mb-4">{{ selectedForm.title }}</h2>
+    <div v-if="fillFormStore.selectedForm">
+      <h2 class="mb-4">{{ fillFormStore.selectedForm.title }}</h2>
       <div class="mb-4">
         <v-btn color="primary" @click="toggleEditMode">
           {{ isEditing ? 'Salvar formulário' : 'Editar formulário' }}
@@ -14,7 +14,7 @@
         >Excluir formulário
         </v-btn>
       </div>
-      <div v-for="(field, index) in selectedForm.fields" :key="index" class="d-flex align-center">
+      <div v-for="(field, index) in fillFormStore.selectedForm.fields" :key="index" class="d-flex align-center">
         <component
           :is="field.component"
           :label="field.label"
@@ -66,13 +66,8 @@ export default {
       snackbarMessage: '',
     };
   },
-  computed: {
-    selectedForm() {
-      return this.fillFormStore.selectedForm;
-    },
-  },
   watch: {
-    selectedForm(newForm, oldForm) {
+    'fillFormStore.selectedForm'(newForm, oldForm) {
       if (newForm && newForm !== oldForm) {
         this.isEditing = true;
       }
@@ -94,7 +89,7 @@ export default {
       this.$refs.deleteDialog.openDialog();
     },
     deleteForm() {
-      this.fillFormStore.deleteForm(this.selectedForm);
+      this.fillFormStore.deleteForm(this.fillFormStore.selectedForm);
       this.showSnackbar("Formulário excluído com sucesso");
     },
   },
