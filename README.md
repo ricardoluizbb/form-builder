@@ -1,24 +1,42 @@
-# form-builder
+# Pré-requisitos
 
-## Project setup
+O único pré-requisito para rodar o projeto é ter o Node.js instalado no computador. Portanto, assegure que ele esteja devidamente instalado.
+
+# Como Rodar o projeto
+
+Após clonar o projeto, navegue até a pasta que ele se encontra e siga os dois passos abaixo:
+
+### Instalação de dependências
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Executando o projeto
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+# Decisões de arquitetura e design
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Estrutura de pastas
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+A estrutura de pastas foi feita dessa forma para que ficasse clara a separação de responsabilidades, facilitando a manutenção do código e o tornasse mais escalável.
+
+### Componentização
+
+O projeto foi separado em três tipos de componentes, sendo eles:
+
+  - form-builder: responsável pela parte de criação do formulário.
+  - fill-form: responsável pelo preenchimento do formulário escolhido
+  - fields: todos os campos que o formulário pode conter.
+
+Dessa maneira, fica mais simples de implementar novas funcionalidades ou alterar qualquer regra de negócio de cada um dos campos.
+
+### Vuetify
+
+O Vuetify foi escolhido por possuir uma vasta biblioteca de UI customizáveis.
+
+
+### Testes
+
+O projeto possui testes unitários que asseguram que os componentes estão funcionando conforme o esperado.
