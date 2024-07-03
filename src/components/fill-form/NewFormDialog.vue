@@ -1,7 +1,7 @@
 <template>
-  <v-dialog v-model="internalDialogVisible" width="500">
+  <v-dialog id="dialog" v-model="internalDialogVisible" width="500">
     <v-card>
-      <v-card-title class="text-h5 grey lighten-2">
+      <v-card-title id="card-title" class="text-h5 grey lighten-2">
         Formulários criados
       </v-card-title>
 
@@ -11,13 +11,13 @@
           :key="form.id"
           @click="addFormToList(form)"
         >
-          <v-list-item-title class="primary--text">{{ form.title }}</v-list-item-title>
+          <v-list-item-title id="form-title" class="primary--text">{{ form.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="closeDialog">
+        <v-btn id="close-btn" text @click="closeDialog">
           Fechar
         </v-btn>
       </v-card-actions>

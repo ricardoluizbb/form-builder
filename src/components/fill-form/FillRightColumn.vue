@@ -7,6 +7,7 @@
           {{ isEditing ? 'Salvar formulário' : 'Editar formulário' }}
         </v-btn>
         <v-btn
+          id="delete-form-btn"
           class="ml-4"
           color="red darken-1"
           outlined

@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-btn width="100%" color="primary" outlined @click="dialog = true">
+    <v-btn id="new-form-btn" width="100%" color="primary" outlined @click="dialog = true">
       Novo formulário
     </v-btn>
 
@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       dialog: false,
-      fillFormStore: useFillFormStore()
     };
   },
   components: {
@@ -50,6 +49,10 @@ export default {
   },
   created() {
     this.fillFormStore.loadFillFormsList();
+  },
+  setup() {
+    const fillFormStore = useFillFormStore();
+    return { fillFormStore };
   },
 };
 </script>
